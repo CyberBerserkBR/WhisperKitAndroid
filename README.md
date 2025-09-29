@@ -41,7 +41,7 @@ To use WhisperKit in your Android app, you need to:
 ```kotlin
 dependencies {
    // 1. WhisperKit SDK
-   implementation("com.argmaxinc:whisperkit:0.3.2")  // Check badge above for latest version
+   implementation("com.argmaxinc:whisperkit:0.3.3")  // Check badge above for latest version
 
    // 2. QNN dependencies for hardware acceleration
    implementation("com.qualcomm.qnn:qnn-runtime:2.34.0")
