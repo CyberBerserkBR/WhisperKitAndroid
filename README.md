@@ -1,3 +1,8 @@
+
+> [!IMPORTANT]
+> `WhisperKitAndroid` is deprecated. `argmax-sdk-kotlin` will soon supplant this repository with an architectural redesign built on top of Google LiteRT.
+
+
 <div align="center">
 
 <a href="https://github.com/argmaxinc/WhisperKit#gh-light-mode-only">
