@@ -1,0 +1,40 @@
+name: Build WhisperKitAndroid APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Download WhisperKitAndroid v0.3.3 Source
+        run: |
+          wget https://github.com/argmaxinc/WhisperKitAndroid/archive/refs/tags/v0.3.3.zip -O whisperkit.zip
+          unzip -q -o whisperkit.zip
+          cp -rf WhisperKitAndroid-0.3.3/. .
+          rm -rf WhisperKitAndroid-0.3.3 whisperkit.zip
+
+      - name: Make Gradlew Executable
+        run: chmod +x gradlew
+
+      - name: Build WhisperAX APK
+        run: ./gradlew :android:examples:WhisperAX:assembleDebug --no-daemon -x test -x lint
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: WhisperAX-v0.3.3-debug
+          path: android/examples/WhisperAX/build/outputs/apk/debug/*.apk
